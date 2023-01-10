@@ -1,16 +1,8 @@
 package com.example.lms.service;
 
-import com.example.lms.model.Book;
-import com.example.lms.model.User;
 
-public interface UserService {
-    Book borrowBook();
+import org.springframework.stereotype.Service;
 
-    Book giveReview(Book book);
-
-    User register();
-
-    void  deleteBook(Book book);
-
-
+@Service
+public class UserService {
 }
