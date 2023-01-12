@@ -14,20 +14,10 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
-    UserRepo  repo;
+    public UserRepo repo;
 
-
-
-
-    public  void register(User user){
-        repo.save(user);
-    }
-
-
-    public User borrowBook(User user, Book requestedBook) throws  Exception{
-        return  null;
-    }
 
     public User giveReview(Book readBook, User user) throws UserNotFoundException{
         Optional<User> requestedUser=repo.findById(user.getEmailID());
@@ -42,7 +32,20 @@ public class UserService {
     }
 
 
+    public Optional<User> getUserById(String emailID) {
+        Optional<User>returned=null;
+        Optional<User> requestedUser=repo.findById(emailID);
+        List<User>users=new ArrayList<>();
+        for (User anyUser: users){
+            if (anyUser.getEmailID().equals(requestedUser.get())){
+                 returned=requestedUser;
+            }
+            else  returned=null;
+            }
+        return returned;
 
     }
+
+}
 
 

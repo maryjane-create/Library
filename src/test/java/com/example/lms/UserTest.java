@@ -1,22 +1,43 @@
 package com.example.lms;
 
+import com.example.lms.model.Book;
 import com.example.lms.model.User;
 import com.example.lms.repo.UserRepo;
 import com.example.lms.service.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.bson.assertions.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
+
+
+
+
     @Test
     void testThatUserCanBorrowBook() throws Exception {
-        UserService user=new UserService();
-        User randomUser=new User();
-        randomUser.setName("jackson");
-        randomUser.setEmailID("u@gmail.com");
-        randomUser.setPassword("pass");
-        user.register(randomUser);
-        System.out.println(randomUser);
-
 
 
     }
+
+    @Test
+    void testThatUserIsRegistered(@Autowired User user){
+        user.setName("juu");
+        assertNotNull(user);
+        assertEquals("user", user.getName());
+    }
+
+    @Test
+    void  testThatUserCanReviewBook(){
+
+    }
+
+    @Test
+    void  testThatUserCanRemoveBook(){
+
+    }
+
+
 }
