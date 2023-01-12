@@ -1,6 +1,7 @@
 package com.example.lms.service;
 
 
+import com.example.lms.exception.UserNotFoundException;
 import com.example.lms.model.Book;
 import com.example.lms.model.User;
 import com.example.lms.repo.UserRepo;
@@ -9,33 +10,36 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
-    UserRepo repo;
+    UserRepo  repo;
 
 
-    public  User register(User user){
-        user.setName(user.getName());
-        user.setEmailID(user.getEmailID());
-        user.setPassword(user.getPassword());
+
+
+    public  void register(User user){
         repo.save(user);
+    }
+
+
+    public User borrowBook(User user, Book requestedBook) throws  Exception{
+        return  null;
+    }
+
+    public User giveReview(Book readBook, User user) throws UserNotFoundException{
+        Optional<User> requestedUser=repo.findById(user.getEmailID());
+        List<User>users=new ArrayList<>();
+        for (User anyUser: users){
+        if (anyUser.getEmailID().equals(requestedUser.get())){
+            readBook.setReview(readBook.getReview());
+        }
+        else throw new UserNotFoundException();
+        }
         return  user;
     }
-    public User borrowBook(User user, Book requestedBook) throws  Exception{
-        if (register(user).equals(user)){
-            List<Book>books=new ArrayList<>();
-            for (Book book:books){
-                if (book.getIsbn().equals(requestedBook.getIsbn())){
-                    return  user;
-                }
-                return user;
-            }
-        }
-
-        return  null;
-        }
 
 
 
